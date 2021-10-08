@@ -1,0 +1,13 @@
+
+ <h1 [style.font-size.px]="myFontSize" *ngIf="myFontSize!=0">{{title}}</h1>
+<app-child-component [count]="myFontSize" ></app-child-component>
+<label>Font <input type="number" [(ngModel)]="myFontSize" /></label>
+<br>
+<button  class="btn btn-primary" (click)="increment()"> + </button>
+
+<button class="btn btn-warning" (click)="decrement()"> - </button>
+
+
+
+
+<!-- (countChanged)="countChangedHandler($event)" -->

@@ -1,0 +1,4 @@
+<h1  [ngStyle] = "{'font-size.px': myFontSize}" *ngIf="myFontSize != 0 || myFontSize < 0" >{{title}}</h1>
+<app-child1-component [count]="myFontSize"   (countChanged)="countChangedHandler($event)" ></app-child1-component>
+<label>Font Size :<input type="number" [(ngModel)]="myFontSize" /></label>
+ 
