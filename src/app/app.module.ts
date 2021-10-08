@@ -15,6 +15,7 @@ import { Parent1ComponentComponent } from './parent1-component/parent1-component
 import { UserComponentComponent } from './user-component/user-component.component';
 import { RegisterComponentComponent } from './register-component/register-component.component';
 import { FormComponentComponent } from './form-component/form-component.component';
+import { NewEmptyComponentComponent } from './new-empty-component/new-empty-component.component';
 
  
 
@@ -29,7 +30,8 @@ import { FormComponentComponent } from './form-component/form-component.componen
     Parent1ComponentComponent,
     UserComponentComponent,
     RegisterComponentComponent,
-    FormComponentComponent
+    FormComponentComponent,
+    NewEmptyComponentComponent
   ],
   imports: [
     BrowserModule,
