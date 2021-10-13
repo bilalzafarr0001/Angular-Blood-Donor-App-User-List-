@@ -1,6 +1,11 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
+import { BloodService } from './blood.service';
+import { HttpClientModule } from '@angular/common/http';
+
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ToastrModule } from 'ngx-toastr';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -17,8 +22,6 @@ import { RegisterComponentComponent } from './register-component/register-compon
 import { FormComponentComponent } from './form-component/form-component.component';
 import { NewEmptyComponentComponent } from './new-empty-component/new-empty-component.component';
 
- 
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -31,16 +34,19 @@ import { NewEmptyComponentComponent } from './new-empty-component/new-empty-comp
     UserComponentComponent,
     RegisterComponentComponent,
     FormComponentComponent,
-    NewEmptyComponentComponent
+    NewEmptyComponentComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
+    HttpClientModule,
     FormsModule,
-    Ng2SearchPipeModule
-    
+    Ng2SearchPipeModule,
+
+    BrowserAnimationsModule,
+    ToastrModule.forRoot(),
   ],
-  providers: [],
-  bootstrap: [AppComponent]
+  providers: [BloodService],
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

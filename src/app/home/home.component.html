@@ -1,24 +1,459 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <div class="container-fluid">
-      <a class="navbar-brand" href="#">Navbar</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-        <div class="navbar-nav">
-          <a class="nav-link active" aria-current="page" href="#">Home</a>
-          <a class="nav-link" href="#">Features</a>
-          <a class="nav-link" href="#">Pricing</a>
-          <a class="nav-link disabled">Disabled</a>
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">Navbar</a>
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarNavAltMarkup"
+      aria-controls="navbarNavAltMarkup"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+      <div class="navbar-nav">
+        <a class="nav-link active" aria-current="page" href="#">Home</a>
+      </div>
+    </div>
+    <button class="btn btn-warning" (click)="logOut()">Logout</button>
+  </div>
+</nav>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-6 text-centre">welcome Admin</div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="m-5 row">
+    <div class="row">
+      <img
+        style="width: 120px; height: 100px; border-radius: 50%"
+        src="https://p.kindpng.com/picc/s/587-5874678_heartbeat-vector-png-icon-blood-donation-png-transparent.png"
+        class="img-fluid"
+        alt="..."
+      />
+      <h2>
+        Blood <span style="color: rgba(255, 0, 0, 0.726)">Donation</span> App
+      </h2>
+    </div>
+    <button
+      type="button"
+      class="btn btn-outline-secondary btn-block"
+      data-bs-toggle="modal"
+      data-bs-target="#exampleModal"
+      data-bs-toggle="modal"
+      data-bs-target="#staticBackdrop"
+    >
+      Add User
+    </button>
+    <br /><br />
+    <br /><br />
+
+    <div class="row g-1">
+      <div class="col-4">
+        <h3>List of Users :</h3>
+      </div>
+      <div class="col-8">
+        <div class="input-group flex-nowrap">
+          <input
+            type="text"
+            class="form-control"
+            [(ngModel)]="term"
+            placeholder="Search User"
+            aria-label="Username"
+            aria-describedby="addon-wrapping"
+          />
         </div>
       </div>
     </div>
-  </nav>
 
-  <div class="container">
-      <div class="row">
-          <div class="col-md-6 text-centre" >welcome {{ name }} </div>
-      </div>
+    <br /><br />
+    <br /><br />
+
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">First Name</th>
+          <th scope="col">Last Name</th>
+          <th scope="col">Email</th>
+          <th scope="col">Phone</th>
+          <th scope="col">Blood Group</th>
+          <th scope="col">Location</th>
+          <th scope="col">Delete</th>
+          <th scope="col">Edit</th>
+          <th scope="col">Send Email</th>
+          <th scope="col">Send Message</th>
+        </tr>
+      </thead>
+
+      <tbody *ngFor="let user of Users | filter: term; index as i">
+        <tr>
+          <th scope="row">{{ user.id }}</th>
+          <td scope="row">{{ user.firstname }}</td>
+          <td scope="row">{{ user.lastname }}</td>
+          <td scope="row">{{ user.email }}</td>
+          <td scope="row">{{ user.phone }}</td>
+          <td scope="row">{{ user.blood_group }}</td>
+          <td scope="row">{{ user.location }}</td>
+          <td scope="row">
+            <button class="btn btn-danger" (click)="deleteUser(user.id)">
+              Delete
+            </button>
+          </td>
+          <td scope="row">
+            <button
+              type="button"
+              class="btn btn-primary"
+              data-bs-toggle="modal"
+              data-bs-target="#exampleModal1"
+              (click)="editUser(user.id)"
+            >
+              Edit
+            </button>
+          </td>
+          <td scope="row">
+            <button class="btn btn-outline-secondary">
+              <a
+                style="text-decoration: none; color: #222"
+                href="mailto:bilalzafarr39@gmail.com&subject=Mail from our Website&body=Some body text here"
+                >Send Email</a
+              >
+            </button>
+          </td>
+          <td scope="row">
+            <button class="btn btn-outline-info">
+              <a
+                style="text-decoration: none; color: #222"
+                href="tel:+923016159646"
+                >Mobile
+              </a>
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <!-- <p
+        *ngIf="usersArray.length == 0"
+        style="color: grey; margin-left: 350px; margin-top: 50px"
+      >
+        No User Found
+      </p> -->
   </div>
+</div>
 
-  
+<!-- Button trigger modal -->
+
+<!-- Modal -->
+<div
+  class="modal fade"
+  id="exampleModal"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  id="staticBackdrop"
+  data-bs-backdrop="static"
+  data-bs-keyboard="false"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <strong>
+          <h5 class="modal-title display-6" id="exampleModalLabel">
+            ADD USER INFO
+          </h5></strong
+        >
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <form
+          style="width: 300px"
+          #userForms="ngForm"
+          (ngSubmit)="userForms.form.valid && onSubmit(userForms)"
+        >
+          <div class="form-group">
+            <label>First Name</label>
+            <input
+              type="text"
+              name="firstname"
+              pattern="[a-zA-Z][a-zA-Z ]+[a-zA-Z]$"
+              #firstnames="ngModel"
+              class="form-control"
+              ngModel
+              required
+            />
+            <span
+              *ngIf="firstnames.invalid && firstnames.touched"
+              style="color: red"
+              >Please Enter First Name
+            </span>
+          </div>
+          <br />
+          <div class="form-group">
+            <label>Last Name</label>
+            <input
+              type="text"
+              name="lastname"
+              pattern="[a-zA-Z][a-zA-Z ]+[a-zA-Z]$"
+              #lastnames="ngModel"
+              class="form-control"
+              ngModel
+              required
+            />
+            <span
+              *ngIf="lastnames.invalid && lastnames.touched"
+              style="color: red"
+              >Please Enter Last Name
+            </span>
+          </div>
+          <br />
+          <div class="form-group">
+            <label>Email</label>
+            <input
+              type="text"
+              name="email"
+              email
+              #emails="ngModel"
+              class="form-control"
+              ngModel
+              required
+            />
+            <span *ngIf="emails.invalid && emails.touched" style="color: red"
+              >{{ emailError }}
+            </span>
+          </div>
+          <br />
+          <div class="form-group">
+            <label>Number</label>
+            <input
+              type="number"
+              name="num"
+              pattern="^((\\+92-?)|0)?[0-9]{12}$"
+              minlength="11"
+              maxlength="11"
+              #num="ngModel"
+              lastname
+              class="form-control"
+              ngModel
+              required
+            />
+            <span *ngIf="num.invalid && num.touched" style="color: red"
+              >Please Enter Valid Number
+            </span>
+            <div *ngIf="num.errors?.pattern" style="color: red">
+              Mobile number is not 10 digit
+            </div>
+          </div>
+
+          <br />
+          <div class="form-group">
+            <label>Blood Group</label>
+            <input
+              type="text"
+              name="bg"
+              pattern="^(A|B|AB|O)[-+]$"
+              #bgs="ngModel"
+              class="form-control"
+              ngModel
+              required
+            />
+            <span *ngIf="bgs.invalid && bgs.touched" style="color: red"
+              >Please Enter Valid Blood Group
+            </span>
+          </div>
+          <br />
+          <div class="form-group">
+            <label>Location</label>
+            <input
+              type="text"
+              name="loc"
+              pattern="[a-zA-Z][a-zA-Z ]+[a-zA-Z]$"
+              #locs="ngModel"
+              class="form-control"
+              ngModel
+              required
+            />
+            <span *ngIf="locs.invalid && locs.touched" style="color: red"
+              >Please Enter Valid Blood Group
+            </span>
+          </div>
+          <br />
+          <div class="form-group">
+            <button
+              [disabled]="userForms.invalid"
+              class="btn btn-danger btn-block"
+            >
+              Submit
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--- Edit Modal -->
+
+<div
+  class="modal fade"
+  id="exampleModal1"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <strong>
+          <h5 class="modal-title display-6" id="exampleModalLabel">
+            Edit USER INFO
+          </h5></strong
+        >
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <form
+          style="width: 300px"
+          #userForm="ngForm"
+          (ngSubmit)="userForm.form.valid && onSubmitForm(userForm)"
+        >
+          <div class="form-group">
+            <label>First Name</label>
+            <input
+              type="text"
+              name="firstname"
+              class="form-control"
+              [(ngModel)]="firstname"
+              #editfirstname="ngModel"
+              pattern="[a-zA-Z][a-zA-Z ]+[a-zA-Z]$"
+              required
+            />
+            <span
+              *ngIf="editfirstname.invalid && editfirstname.touched"
+              style="color: red"
+              >Please Enter First Name
+            </span>
+          </div>
+          <br />
+          <div class="form-group">
+            <label>Last Name</label>
+            <input
+              type="text"
+              name="lastname"
+              [(ngModel)]="lastname"
+              #editlastname="ngModel"
+              pattern="[a-zA-Z][a-zA-Z ]+[a-zA-Z]$"
+              class="form-control"
+              required
+            />
+            <span
+              *ngIf="editlastname.invalid && editlastname.touched"
+              style="color: red"
+              >Please Enter Last Name
+            </span>
+          </div>
+          <br />
+          <div class="form-group">
+            <label>Email</label>
+            <input
+              type="text"
+              name="email"
+              email
+              [(ngModel)]="email"
+              #editemail="ngModel"
+              class="form-control"
+              required
+            />
+            <span
+              *ngIf="editemail.invalid && editemail.touched"
+              style="color: red"
+              >{{ emailError }}
+            </span>
+          </div>
+          <br />
+          <div class="form-group">
+            <label>Number</label>
+            <input
+              type="number"
+              name="num"
+              pattern="^((\\+92-?)|0)?[0-9]{12}$"
+              minlength="11"
+              maxlength="11"
+              [(ngModel)]="phone"
+              #editphone="ngModel"
+              class="form-control"
+              required
+            />
+            <span
+              *ngIf="editphone.invalid && editphone.touched"
+              style="color: red"
+              >Please Enter Valid Number
+            </span>
+            <div *ngIf="num.errors?.pattern" style="color: red">
+              Mobile number is not 10 digit
+            </div>
+          </div>
+
+          <br />
+          <div class="form-group">
+            <label>Blood Group</label>
+            <input
+              type="text"
+              name="bg"
+              [(ngModel)]="blood_group"
+              #editblood="ngModel"
+              pattern="^(A|B|AB|O)[-+]$"
+              class="form-control"
+              required
+            />
+            <span
+              *ngIf="editblood.invalid && editblood.touched"
+              style="color: red"
+              >Please Enter Valid Blood Group
+            </span>
+          </div>
+          <br />
+          <div class="form-group">
+            <label>Location</label>
+            <input
+              type="text"
+              name="loc"
+              [(ngModel)]="location"
+              #editlocation="ngModel"
+              pattern="[a-zA-Z][a-zA-Z ]+[a-zA-Z]$"
+              class="form-control"
+              required
+            />
+            <span
+              *ngIf="editlocation.invalid && editlocation.touched"
+              style="color: red"
+              >Please Enter Valid Blood Group
+            </span>
+          </div>
+          <br />
+          <div class="form-group">
+            <button
+              [disabled]="userForm.invalid"
+              class="btn btn-danger btn-block"
+            >
+              Save
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
