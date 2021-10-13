@@ -11,6 +11,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 
+import { AuthguardserviceService } from './authguardservice.service';
+
 import { LoginComponent } from './login/login.component';
 import { HomeComponent } from './home/home.component';
 import { ChildComponentComponent } from './child-component/child-component.component';
@@ -46,7 +48,7 @@ import { NewEmptyComponentComponent } from './new-empty-component/new-empty-comp
     BrowserAnimationsModule,
     ToastrModule.forRoot(),
   ],
-  providers: [BloodService],
+  providers: [BloodService, AuthguardserviceService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

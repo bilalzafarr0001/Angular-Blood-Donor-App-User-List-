@@ -19,8 +19,8 @@ export class LoginComponent implements OnInit {
   username: string = '';
   password: string = '';
   showerror: boolean = false;
+  user = '1';
 
-  
   onSubmit(form: NgForm) {
     console.log(form.value.name);
 
@@ -34,6 +34,7 @@ export class LoginComponent implements OnInit {
 
     this.bloodService.loginAdmin(userObj).subscribe((result) => {
       if (result) {
+        localStorage.setItem('session', this.user);
         this.router.navigateByUrl('/home');
       } else {
         this.showerror = true;
@@ -41,5 +42,9 @@ export class LoginComponent implements OnInit {
     });
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    if (localStorage.getItem('session')) {
+      this.router.navigateByUrl('/home');
+    }
+  }
 }

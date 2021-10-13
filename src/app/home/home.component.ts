@@ -81,6 +81,7 @@ export class HomeComponent implements OnInit {
         this.router.navigateByUrl('/login');
       }
     });
+    localStorage.removeItem('session');
   }
 
   deleteUser(id: number) {
