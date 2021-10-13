@@ -117,12 +117,11 @@
             </button>
           </td>
           <td scope="row">
-            <button class="btn btn-outline-secondary">
-              <a
-                style="text-decoration: none; color: #222"
-                href="mailto:bilalzafarr39@gmail.com&subject=Mail from our Website&body=Some body text here"
-                >Send Email</a
-              >
+            <button
+              class="btn btn-outline-secondary"
+              (click)="emailUser(user.email)"
+            >
+              Send Email
             </button>
           </td>
           <td scope="row">

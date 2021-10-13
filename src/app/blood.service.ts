@@ -56,6 +56,17 @@ export class BloodService {
       )
       .pipe(catchError(this.httpError));
   }
+
+  sendEmail(email: string): Observable<{ email: string }> {
+    return this.httpClient
+      .post<{ email: string }>(
+        this.apiURL + '/send-email',
+        { email },
+        this.httpHeader
+      )
+      .pipe(catchError(this.httpError));
+  }
+
   signOut() {
     return this.httpClient
       .get<boolean>(this.apiURL + '/admin')

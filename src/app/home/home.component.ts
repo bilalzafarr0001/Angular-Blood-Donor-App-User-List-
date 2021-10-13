@@ -139,17 +139,11 @@ export class HomeComponent implements OnInit {
       });
   }
 
-  // const { firstname, lastname, email, num, loc, bg } = form.value;
-  // const userObj: registerUser = {
-  //   firstname: firstname,
-  //   lastname: lastname,
-  //   email: email,
-  //   phone: num,
-  //   blood_group: bg,
-  //   location: loc,
-  // };
-  // this.bloodService.update(id, userObj).subscribe((res) => {
-  //   console.log(res);
-  //   this.fetchUsers();
-  // });
+  emailUser(email: string) {
+    console.log('email', email);
+    this.bloodService.sendEmail(email).subscribe((res) => {
+      console.log(res);
+      this.toastr.success('Email Has Been Send Successfully!');
+    });
+  }
 }
